@@ -15,11 +15,12 @@
         :root {
             --bg-dark: #0B0F19;
             --card-bg: #161B26;
+            --inner-shield: #111520;
             --accent-glow: #00F2FE;
             --accent-purple: #4FACFE;
             --text-main: #FFFFFF;
-            --text-muted: #8F9CAE;
 
+            --text-muted: #8F9CAE;
         }
 
         * {
@@ -38,32 +39,152 @@
             justify-content: space-between;
             align-items: center;
             overflow-x: hidden;
-            padding: 2rem 1rem;
 
+            padding: 2rem 1rem;
+            position: relative;
         }
 
-        /* Ambient background glows */
-        body::before {
-            content: '';
+        /* --- Premium Smooth-Edged Curvy Fixed Cursor System --- */
+        @media (hover: hover) and (pointer: fine) {
+            body, html, a, button, .countdown-box, .popup-close {
+                cursor: none !important; /* Disables the native default pointer */
+            }
+            
+            /* Primary Rounded Smooth-Edge Vector Core Tip (Fixed Orientation) */
+            .custom-cursor-pointer {
+                position: fixed;
+                z-index: 10000;
+                pointer-events: none;
+                top: 0;
+                left: 0;
+                width: 34px;
+                height: 34px;
+
+                will-change: transform;
+                transform: translate3d(-2px, -2px, 0);
+            }
+
+            .custom-cursor-pointer svg {
+                width: 100%;
+                height: 100%;
+                fill: url(#cursor-gradient);
+                filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.7));
+                stroke: var(--bg-dark);
+                stroke-width: 2.5px;
+                stroke-linejoin: round;
+                stroke-linecap: round;
+                transform-origin: top left;
+                transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                will-change: transform;
+            }
+            
+            /* Fluid Motion-Blur Trailing Smooth Curvy Shadow (No Rotation/Skew distortion) */
+
+            .custom-cursor-trail {
+                position: fixed;
+                z-index: 9999;
+                pointer-events: none;
+                top: 0;
+                left: 0;
+                width: 34px;
+                height: 34px;
+                will-change: transform, opacity;
+            }
+
+            .custom-cursor-trail svg {
+                width: 100%;
+                height: 100%;
+                fill: var(--accent-purple);
+                opacity: 0.28;
+                filter: blur(2px) drop-shadow(0 0 6px var(--accent-purple));
+                stroke: var(--bg-dark);
+                stroke-width: 2.5px;
+
+                stroke-linejoin: round;
+                stroke-linecap: round;
+            }
+
+            /* Elegant, high-frequency fine neon ring burst generated instantly on clicks */
+            .cursor-click-ripple {
+                position: fixed;
+                width: 8px;
+                height: 8px;
+                border: 1.5px solid var(--accent-glow);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9998;
+                transform: translate(-50%, -50%);
+                box-shadow: inset 0 0 8px rgba(0, 242, 254, 0.3);
+                animation: circleRippleExpand 0.38s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+            }
+
+            @keyframes circleRippleExpand {
+
+                0% { width: 4px; height: 4px; opacity: 1; border-color: var(--accent-glow); transform: translate(-50%, -50%) scale(0.5); }
+                50% { border-color: #FF007F; box-shadow: 0 0 12px rgba(255, 0, 127, 0.4); }
+                100% { width: 44px; height: 44px; opacity: 0; border-color: var(--accent-purple); transform: translate(-50%, -50%) scale(1.3); }
+            }
+            
+            /* Reactive scale morph loops triggered seamlessly during action item collision overrides */
+            body.cursor-hovering .custom-cursor-pointer svg {
+                filter: drop-shadow(0 0 8px #FF007F);
+                transform: scale(1.15);
+            }
+            
+            /* Click compression morph response */
+            body.cursor-clicking .custom-cursor-pointer svg {
+                transform: scale(0.85);
+            }
+        }
+
+        /* Animated Ambient Plasma Background Orbs */
+        .ambient-orb {
+
             position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            mix-blend-mode: screen;
+            opacity: 0.12;
+            animation: floatOrb 20s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
             top: -10%;
             left: -10%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
-            z-index: -1;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation-duration: 25s;
         }
 
-        body::after {
-            content: '';
-            position: absolute;
+        .orb-2 {
+
             bottom: -10%;
             right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+            animation-duration: 18s;
+            animation-delay: -5s;
+        }
 
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 70%);
-            z-index: -1;
+        .orb-3 {
+            top: 40%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, #7F00FF 0%, transparent 70%);
+            opacity: 0.06;
+            animation-duration: 30s;
+            animation-delay: -10s;
+        }
+
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(5%, 8%) scale(1.1); }
+            100% { transform: translate(-3%, -5%) scale(0.9); }
         }
 
         /* Cool Loading Screen Overlay */
@@ -80,7 +201,7 @@
             justify-content: center;
             align-items: center;
 
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), pointer-events 0.6s ease;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), pointer-events 0.8s ease;
         }
 
         #loading-screen.fade-out {
@@ -89,14 +210,14 @@
         }
 
         .loader-spinner {
-            width: 60px;
-            height: 60px;
-            border: 3px solid rgba(0, 242, 254, 0.05);
+            width: 70px;
+            height: 70px;
+            border: 3px solid rgba(0, 242, 254, 0.03);
             border-top-color: var(--accent-glow);
             border-bottom-color: var(--accent-purple);
             border-radius: 50%;
-            animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin-bottom: 2rem;
+            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            margin-bottom: 2.5rem;
             position: relative;
         }
 
@@ -104,14 +225,14 @@
         .loader-spinner::after {
             content: '';
             position: absolute;
-            top: 4px;
-            left: 4px;
-            right: 4px;
-            bottom: 4px;
+            top: 6px;
+            left: 6px;
+            right: 6px;
+            bottom: 6px;
             border: 2px solid transparent;
             border-left-color: var(--accent-glow);
             border-radius: 50%;
-            animation: spin 0.6s linear infinite reverse;
+            animation: spin 0.5s linear infinite reverse;
         }
 
         @keyframes spin {
@@ -121,9 +242,9 @@
         .loader-text {
             font-family: 'Montserrat', sans-serif;
 
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--text-main);
-            letter-spacing: 3px;
+            letter-spacing: 4px;
             text-transform: uppercase;
             font-weight: 900;
             text-align: center;
@@ -132,7 +253,7 @@
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            animation: shine 2.5s linear infinite;
         }
 
         @keyframes shine {
@@ -143,116 +264,304 @@
 
             font-size: 0.85rem;
             color: var(--text-muted);
-            margin-top: 0.75rem;
+            margin-top: 0.85rem;
             letter-spacing: 1px;
             font-family: monospace;
+            opacity: 0.8;
         }
 
-        /* Centered Main Widget Container */
+        /* Main Widget Entry Animation */
         .main-widget {
             background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 24px;
-            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 28px;
+            padding: 3.5rem 2.5rem;
             width: 100%;
-            max-width: 800px;
+            max-width: 840px;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             margin: auto;
-            position: relative;
 
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* College Header */
+        body.loaded-active .main-widget {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* College Header Text Effects with Chromatic Micro-Glitch */
         .college-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
         .college-header h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
+
+            font-size: 1.65rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted));
+            background: linear-gradient(135deg, var(--text-main) 40%, #a0aec0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: titleGlitch 6s infinite ease-in-out;
+            will-change: text-shadow, transform;
+        }
+
+        @keyframes titleGlitch {
+            0%, 93%, 95%, 100% {
+                text-shadow: none;
+                transform: skewX(0deg);
+            }
+            94% {
+                text-shadow: 2px -1px 0 rgba(0, 242, 254, 0.7), -2px 1px 0 rgba(79, 172, 254, 0.7);
+                transform: skewX(-2deg);
+            }
+
+            94.5% {
+                text-shadow: -3px 1.5px 0 rgba(0, 242, 254, 0.8), 3px -1.5px 0 rgba(255, 0, 127, 0.6);
+                transform: skewX(3deg);
+            }
         }
 
         .college-header p {
-
             color: var(--accent-glow);
-            font-size: 0.9rem;
-            letter-spacing: 4px;
+            font-size: 0.95rem;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            margin-top: 0.25rem;
+            margin-top: 0.4rem;
             font-weight: 700;
+            position: relative;
+            display: inline-block;
         }
 
-        /* Center Grid Layout for Countdown */
+        /* Animated tracking header bar line */
+        .college-header p::after {
+
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 25%;
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-glow), transparent);
+        }
+
+        /* Grid Layout Configuration with Perspective Frame */
         .countdown-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 1rem;
-            margin-bottom: 3rem;
+            gap: 1.25rem;
+            margin-bottom: 3.5rem;
+            position: relative;
+            perspective: 1200px;
         }
 
-        @media (max-width: 640px) {
+
+        @media (max-width: 680px) {
             .countdown-grid {
                 grid-template-columns: repeat(3, 1fr);
-
-                gap: 0.75rem;
+                gap: 0.85rem;
             }
             .countdown-box.seconds-box, .countdown-box.minutes-box {
                 grid-column: span 1;
             }
         }
 
+        /* Advanced Countdown Box with Laser Borders and 3D space rules */
         .countdown-box {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 1.25rem 0.5rem;
-            border-radius: 16px;
             position: relative;
-            transition: all 0.3s ease;
+            padding: 1.5rem 0.5rem;
+            border-radius: 18px;
+            overflow: hidden;
+            opacity: 0;
+            transform: scale(0.85) translateY(15px);
+            transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
+
+                        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: rgba(255, 255, 255, 0.01);
+            transform-style: preserve-3d;
+            will-change: transform, box-shadow;
         }
 
-        .countdown-box:hover {
-            border-color: rgba(0, 242, 254, 0.3);
-            background: rgba(255, 255, 255, 0.04);
+        /* Kinetic Rotating Laser Border Track */
+        .countdown-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent 65%, var(--accent-purple), var(--accent-glow), transparent);
+            animation: rotateLaser 6s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.25;
 
-            transform: translateY(-2px);
+            transition: opacity 0.3s ease;
         }
 
+        .countdown-box:hover::before {
+            opacity: 0.8;
+            animation-duration: 2.5s;
+        }
+
+        @keyframes rotateLaser {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Inner Shield to mask the gradient borders into a sharp edge stream line */
+        .countdown-box-inner {
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            right: 1px;
+            bottom: 1px;
+
+            background-color: var(--inner-shield);
+            border-radius: 17px;
+            z-index: 2;
+            pointer-events: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .countdown-box:hover .countdown-box-inner {
+            background-color: rgba(22, 27, 38, 0.95);
+        }
+
+        /* Sweeping Digital Scanline running in perfect sync directly behind numbers */
+        .countdown-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), var(--accent-glow), rgba(0, 242, 254, 0.3), transparent);
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0;
+            animation: cardScanline 4s linear infinite;
+        }
+
+        @keyframes cardScanline {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* Layered Content Container elevated and transformed for Parallax lift depth */
+        .countdown-box-content {
+            position: relative;
+            z-index: 5;
+            pointer-events: none;
+
+            transform: translateZ(35px);
+            transition: transform 0.2s ease;
+        }
+
+        /* Sequential cascading entry delays when app initializes */
+        body.loaded-active .countdown-box:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: scale(1) translateY(0); }
+        body.loaded-active .countdown-box:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: scale(1) translateY(0); }
+        body.loaded-active .countdown-box:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: scale(1) translateY(0); }
+        body.loaded-active .countdown-box:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: scale(1) translateY(0); }
+        body.loaded-active .countdown-box:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: scale(1) translateY(0); }
+
+        /* Countdown Numbers Base */
         .countdown-num {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.75rem;
             font-weight: 700;
             display: block;
             color: var(--text-main);
             line-height: 1.1;
+
+            will-change: transform, text-shadow, color;
         }
 
-        /* Highlight the weeks and days specifically */
+        /* Special neon highlights for weeks/days */
         .countdown-box.highlighted .countdown-num {
             color: var(--accent-glow);
-            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+        }
+
+        /* Kinetic Pop animation sequence on numerical boundary swap */
+        @keyframes numericTick {
+            0% {
+                transform: scale(1.24);
+                color: var(--accent-glow);
+                text-shadow: 0 0 25px rgba(0, 242, 254, 0.85), 0 0 10px rgba(0, 242, 254, 0.4);
+            }
+            40% {
+                transform: scale(0.93);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .num-tick-active {
+            animation: numericTick 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        /* Dynamic Expanding Radial Shockwave Layer inside the active cells */
+        .shockwave-layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent-glow);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0.1);
+
+            opacity: 0;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        @keyframes shockwavePulse {
+            0% {
+                transform: translate(-50%, -50%) scale(0.1);
+                opacity: 0.75;
+                filter: blur(0px);
+            }
+            60% {
+                opacity: 0.35;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(2.4);
+                opacity: 0;
+                filter: blur(5px);
+            }
+
+        }
+
+        .box-pulse-active .shockwave-layer {
+            animation: shockwavePulse 0.45s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
         }
 
         .countdown-label {
-
             font-size: 0.75rem;
             text-transform: uppercase;
             color: var(--text-muted);
-            letter-spacing: 1px;
-            margin-top: 0.5rem;
+            letter-spacing: 1.5px;
+            margin-top: 0.6rem;
             display: block;
             font-weight: 700;
         }
 
-        /* Live Progress Slider */
+        /* Live Tracker Progress System */
         .live-progress-container {
             margin-top: 2rem;
+
             text-align: left;
         }
 
@@ -260,8 +569,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.85rem;
         }
 
         .progress-title {
@@ -273,87 +581,140 @@
 
         .progress-percentage {
             color: var(--accent-glow);
+
             font-weight: 700;
             font-size: 1rem;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
         }
 
         .progress-track {
-            background: rgba(255, 255, 255, 0.05);
-            height: 12px;
-
+            background: rgba(255, 255, 255, 0.04);
+            height: 14px;
             border-radius: 999px;
             width: 100%;
             overflow: hidden;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.01);
         }
 
         .progress-bar {
-            background: linear-gradient(90deg, var(--accent-purple), var(--accent-glow));
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-glow), var(--accent-purple));
+            background-size: 200% auto;
             height: 100%;
+
             width: 0%;
             border-radius: 999px;
-            transition: width 0.5s ease-out;
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
+            animation: shiftGlow 4s linear infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Fluid light sheen sweeping smoothly across the active filled progress width */
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+            animation: meteorPulse 2.5s infinite linear;
+
+        }
+
+        @keyframes meteorPulse {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes shiftGlow {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         .date-footer-row {
             display: flex;
             justify-content: space-between;
-
-            margin-top: 0.5rem;
-            font-size: 0.75rem;
+            margin-top: 0.65rem;
+            font-size: 0.78rem;
             color: var(--text-muted);
+            opacity: 0.9;
+
         }
 
-        /* Interactive Buttons Style */
+        /* Bottom Control Button Container */
         .button-container {
             display: flex;
-            gap: 1rem;
+            gap: 1.25rem;
             justify-content: center;
-            margin-top: 2.5rem;
+            margin-top: 3rem;
         }
 
         .interactive-btn {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-main);
-            padding: 0.8rem 1.8rem;
-            border-radius: 12px;
-
+            padding: 0.9rem 2rem;
+            border-radius: 14px;
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
             font-size: 0.85rem;
-            letter-spacing: 1px;
+
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .interactive-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
+            transition: left 0.5s ease;
+        }
+
+
+        .interactive-btn:hover::before {
+            left: 100%;
         }
 
         .interactive-btn:hover {
             border-color: var(--accent-glow);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
-            background: rgba(0, 242, 254, 0.05);
-            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
+            background: rgba(0, 242, 254, 0.06);
+            transform: translateY(-3px);
         }
 
-        /* Full Screen Popup Modals */
+        .interactive-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Modern Full Screen Popup Modals */
         .fullscreen-popup {
             position: fixed;
-
             top: 0;
+
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(11, 15, 25, 0.96);
-            backdrop-filter: blur(20px);
+            background-color: rgba(7, 10, 18, 0.94);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             padding: 1.5rem;
         }
 
@@ -365,67 +726,66 @@
 
         .popup-content {
             background-color: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 3rem 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 24px;
+            padding: 3.5rem 2.5rem;
             width: 100%;
-            max-width: 650px;
-            transform: translateY(20px);
-            transition: transform 0.3s ease;
+            max-width: 680px;
+            transform: translateY(40px) scale(0.95);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.04);
         }
 
         .fullscreen-popup.active .popup-content {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
 
-        /* Secure, Clickable Close Button Design placed inside the card frame */
         .popup-close {
             position: absolute;
-            top: 1.25rem;
-            right: 1.25rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-main);
-            font-size: 1.25rem;
-            width: 36px;
-            height: 36px;
+            font-size: 1.35rem;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             line-height: 1;
             z-index: 10;
-
         }
+
 
         .popup-close:hover {
             color: var(--accent-glow);
             border-color: var(--accent-glow);
             background: rgba(0, 242, 254, 0.1);
-            transform: rotate(90deg);
+            transform: rotate(90deg) scale(1.05);
         }
 
         .popup-content h2 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1.75rem;
+            font-size: 1.85rem;
             font-weight: 900;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.75rem;
             color: var(--accent-glow);
             text-transform: uppercase;
             letter-spacing: 1px;
             padding-right: 2rem;
         }
 
-
         .popup-body {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #CBD5E0;
+
+            font-size: 1.02rem;
+            line-height: 1.75;
+            color: #D1D5DB;
             text-align: left;
         }
 
@@ -434,41 +794,86 @@
         }
 
         .popup-body li {
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
             border-left: 3px solid var(--accent-purple);
-            padding-left: 1rem;
+            padding-left: 1.25rem;
+            transform: translateX(-10px);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
         }
+
+
+        .fullscreen-popup.active .popup-body li:nth-child(1) { transition-delay: 0.15s; transform: translateX(0); opacity: 1; }
+        .fullscreen-popup.active .popup-body li:nth-child(2) { transition-delay: 0.25s; transform: translateX(0); opacity: 1; }
+        .fullscreen-popup.active .popup-body li:nth-child(3) { transition-delay: 0.35s; transform: translateX(0); opacity: 1; }
 
         .popup-body strong {
             color: var(--text-main);
-
             display: block;
-            font-size: 1.05rem;
-            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+            margin-bottom: 0.35rem;
         }
 
-        /* Subtle Simple Footer */
+        /* Subtle System Footer */
         footer {
-            margin-top: 2rem;
+            margin-top: 3rem;
             font-size: 0.8rem;
             color: var(--text-muted);
             text-align: center;
             letter-spacing: 1px;
             line-height: 1.8;
+
+            z-index: 2;
         }
 
         .credit-text {
             color: var(--accent-glow);
             font-weight: 700;
             letter-spacing: 2px;
-
             text-transform: uppercase;
             font-size: 0.75rem;
-            margin-top: 0.5rem;
+            margin-top: 0.6rem;
+            text-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
         }
     </style>
 </head>
 <body>
+
+    <!-- SVG Definitions Layer for Vector Cursor Gradients -->
+    <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
+        <defs>
+
+            <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00F2FE" />
+                <stop offset="100%" stop-color="#4FACFE" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <!-- Custom Fixed-Orientation Smooth-Edged Rounded Cursor Layers -->
+    <div class="custom-cursor-pointer" id="cursor-core">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <!-- Hyper-smooth cursor silhouette plotted with curved bezier nodes and generous rounded tracking joints -->
+            <path d="M 5,3 
+                     C 5,3 25.5,13.2 26,13.5 
+                     C 26.5,13.8 26.2,14.6 25.5,14.8
+                     C 24.8,15 17.2,17.2 16.5,17.5 
+                     C 15.8,17.8 14.8,24.8 14.5,25.5 
+                     C 14.3,26.2 13.5,26.5 13.2,26
+                     C 12.9,25.5 5,3 5,3 Z" />
+        </svg>
+
+    </div>
+    <div class="custom-cursor-trail" id="cursor-shadow">
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 5,3 C 5,3 25.5,13.2 26,13.5 C 26.5,13.8 26.2,14.6 25.5,14.8 C 24.8,15 17.2,17.2 16.5,17.5 C 15.8,17.8 14.8,24.8 14.5,25.5 C 14.3,26.2 13.5,26.5 13.2,26 C 12.9,25.5 5,3 5,3 Z" />
+        </svg>
+    </div>
+
+    <!-- Ambient Plasma Floating Layers -->
+    <div class="ambient-orb orb-1"></div>
+    <div class="ambient-orb orb-2"></div>
+    <div class="ambient-orb orb-3"></div>
 
     <!-- Cool Loading Screen Overlay -->
     <div id="loading-screen">
@@ -477,40 +882,68 @@
         <div class="loader-subtext" id="loader-status">Initializing connection protocol...</div>
     </div>
 
+
     <!-- Main Dynamic Center Interface Widget -->
     <div class="main-widget">
         
         <!-- College Identification Info -->
-
         <div class="college-header">
             <h1>Leppington Anglican College</h1>
             <p>Holiday Countdown</p>
         </div>
 
-        <!-- The Countdown Matrix including Weeks -->
+        <!-- The Countdown Matrix including Weeks and Internalized Scan Layers -->
         <div class="countdown-grid">
+            
             <div class="countdown-box highlighted">
-                <span class="countdown-num" id="weeks">00</span>
-                <span class="countdown-label">Weeks</span>
-            </div>
-            <div class="countdown-box highlighted">
-                <span class="countdown-num" id="days">00</span>
-                <span class="countdown-label">Days</span>
-            </div>
-            <div class="countdown-box">
-                <span class="countdown-num" id="hours">00</span>
-                <span class="countdown-label">Hours</span>
+                <div class="countdown-box-inner"></div>
+                <div class="shockwave-layer"></div>
+                <div class="countdown-box-content">
+                    <span class="countdown-num" id="weeks">00</span>
+                    <span class="countdown-label">Weeks</span>
+                </div>
+
             </div>
 
+            <div class="countdown-box highlighted">
+                <div class="countdown-box-inner"></div>
+                <div class="shockwave-layer"></div>
+                <div class="countdown-box-content">
+                    <span class="countdown-num" id="days">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+            </div>
+
+            <div class="countdown-box">
+                <div class="countdown-box-inner"></div>
+                <div class="shockwave-layer"></div>
+                <div class="countdown-box-content">
+                    <span class="countdown-num" id="hours">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+            </div>
+
+
             <div class="countdown-box minutes-box">
-                <span class="countdown-num" id="minutes">00</span>
-                <span class="countdown-label">Mins</span>
+                <div class="countdown-box-inner"></div>
+                <div class="shockwave-layer"></div>
+                <div class="countdown-box-content">
+                    <span class="countdown-num" id="minutes">00</span>
+                    <span class="countdown-label">Mins</span>
+                </div>
             </div>
+
             <div class="countdown-box seconds-box">
-                <span class="countdown-num" id="seconds">00</span>
-                <span class="countdown-label">Secs</span>
+                <div class="countdown-box-inner"></div>
+                <div class="shockwave-layer"></div>
+                <div class="countdown-box-content">
+                    <span class="countdown-num" id="seconds">00</span>
+                    <span class="countdown-label">Secs</span>
+                </div>
             </div>
+
         </div>
+
 
         <!-- Live Interactive Progress Component -->
         <div class="live-progress-container">
@@ -521,7 +954,6 @@
             <div class="progress-track">
                 <div class="progress-bar" id="live-bar"></div>
             </div>
-
             <div class="date-footer-row">
                 <span>Start: Oct 13, 2026</span>
                 <span>End: Dec 9, 2026</span>
@@ -532,6 +964,7 @@
         <div class="button-container">
             <button class="interactive-btn" onclick="togglePopup('tips-popup', true)">Tips for the holiday</button>
             <button class="interactive-btn" onclick="togglePopup('more-popup', true)">More Info</button>
+
         </div>
 
     </div>
@@ -541,7 +974,6 @@
         <div class="popup-content">
             <button class="popup-close" onclick="togglePopup('tips-popup', false)" aria-label="Close popup">&times;</button>
             <h2>Holiday Tips & Ideas</h2>
-
             <div class="popup-body">
                 <ul>
                     <li>
@@ -552,6 +984,7 @@
                         <strong>Creative Pursuits & Reading</strong>
                         Ditch the academic course materials and pick up independent creative projects. It's the perfect time to explore fiction novels, write scripts, or build personal software tools.
                     </li>
+
                     <li>
                         <strong>Reconnect with Friends & Family</strong>
                         Plan down-time balances. Use the festive season to set up summer barbecues, group sports sessions, or custom travel excursions with close family members and peers.
@@ -560,7 +993,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Full Screen Popup: More Info -->
     <div id="more-popup" class="fullscreen-popup" onclick="handleOverlayClick(event, 'more-popup')">
@@ -572,6 +1004,7 @@
                     <li>
                         <strong>Official Term 4 Boundaries</strong>
                         Term 4 commenced on Tuesday, 13 October 2026 and concludes for students on Wednesday, 9 December 2026.
+
                     </li>
                     <li>
                         <strong>Summer break distribution</strong>
@@ -581,7 +1014,6 @@
                         <strong>2027 Term 1 Rollout</strong>
                         Staff allocations activate on Monday, 1 February 2027. Selected early learning and secondary cohorts start classes on Tuesday, 2 February 2027, with regular comprehensive attendance resuming on Wednesday, 3 February 2027.
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -593,6 +1025,7 @@
         <div class="credit-text">Made by Arkhen</div>
     </footer>
 
+
     <!-- System Logic Setup -->
     <script>
         // Modal management engine
@@ -601,7 +1034,6 @@
             if (!popupElement) return;
             
             if (show) {
-
                 popupElement.classList.add('active');
                 document.body.style.overflow = 'hidden'; // Lock background scroll
             } else {
@@ -613,15 +1045,89 @@
         // Fallback: Close popup when clicking the outside darkened background overlay area
         function handleOverlayClick(event, popupId) {
             if (event.target.classList.contains('fullscreen-popup')) {
+
                 togglePopup(popupId, false);
             }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
+            // --- Custom Smooth-Edged Fixed-Orientation Cursor Engine ---
+            if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                const coreEl = document.getElementById('cursor-core');
+                const shadowEl = document.getElementById('cursor-shadow');
+
+                let mouseX = -100, mouseY = -100;
+                let coreX = -100, coreY = -100;
+                let shadowX = -100, shadowY = -100;
+
+                document.addEventListener('mousemove', (e) => {
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                });
+
+
+                // Smooth Physics Positional Animation Loop (No Directional Distortions, No Particle Emitters)
+                function animateCursorDynamics() {
+                    // Snappy core positional tracking alignment
+                    let dCoreX = mouseX - coreX;
+                    let dCoreY = mouseY - coreY;
+                    coreX += dCoreX * 0.45;
+                    coreY += dCoreY * 0.45;
+                    coreEl.style.transform = `translate3d(${coreX}px, ${coreY}px, 0)`;
+
+                    // Elastic trail trailing lag calculation (maintains fixed standard angle)
+                    let dShadowX = coreX - shadowX;
+                    let dShadowY = coreY - shadowY;
+                    shadowX += dShadowX * 0.22;
+                    shadowY += dShadowY * 0.22;
+                    
+                    // Positions trailing blur element smoothly behind without rotation or stretching
+                    shadowEl.style.transform = `translate3d(${shadowX}px, ${shadowY}px, 0) scale(1)`;
+
+                    requestAnimationFrame(animateCursorDynamics);
+
+                }
+                requestAnimationFrame(animateCursorDynamics);
+
+                // Fine Concentric Neon Ring expansion feedback on mouse click strikes
+                document.addEventListener('mousedown', (e) => {
+                    document.body.classList.add('cursor-clicking');
+                    
+                    const ripple = document.createElement('div');
+                    ripple.className = 'cursor-click-ripple';
+                    ripple.style.left = e.clientX + 'px';
+                    ripple.style.top = e.clientY + 'px';
+                    document.body.appendChild(ripple);
+                    
+                    ripple.addEventListener('animationend', () => ripple.remove());
+                });
+
+                document.addEventListener('mouseup', () => {
+                    document.body.classList.remove('cursor-clicking');
+                });
+
+
+                // Standard component interaction hover state triggers
+                function bindCursorEffects() {
+                    const targets = document.querySelectorAll('button, .countdown-box, a, .popup-close, .interactive-btn');
+                    targets.forEach(element => {
+                        element.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
+                        element.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
+                    });
+                }
+                bindCursorEffects();
+                
+                document.querySelectorAll('.interactive-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        setTimeout(bindCursorEffects, 120);
+                    });
+                });
+            }
+
             // --- Loading Screen Simulation Logic ---
             const statusLines = [
-                "Initializing connection protocol...",
 
+                "Initializing connection protocol...",
                 "Checking NSW School Holidays...",
                 "Pinging LAC countdown database...",
                 "Fetching regional academic calendar parameters...",
@@ -640,13 +1146,39 @@
 
             // Transition out the loading layer once simulated synchronization concludes
             setTimeout(() => {
-                clearInterval(statusInterval);
 
+                clearInterval(statusInterval);
                 const loader = document.getElementById('loading-screen');
                 if (loader) {
                     loader.classList.add('fade-out');
+                    document.body.classList.add('loaded-active');
                 }
             }, 3200);
+
+
+            // --- Interactive Mouse-Tracking 3D Perspective Tilt Parallax ---
+            const boxes = document.querySelectorAll('.countdown-box');
+            
+            boxes.forEach(box => {
+                box.addEventListener('mousemove', (e) => {
+                    const rect = box.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = ((centerY - y) / centerY) * 12;
+                    const rotateY = ((x - centerX) / centerX) * 12;
+                    
+                    box.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.04)`;
+                });
+                
+                box.addEventListener('mouseleave', () => {
+                    box.style.transform = '';
+                });
+            });
 
 
             // --- Core Countdown Clock Engine ---
@@ -654,19 +1186,47 @@
             const targetTime = new Date('December 9, 2026 15:00:00').getTime();
             // Start Bound: Tuesday, October 13, 2026, at 8:30 AM
             const startTime = new Date('October 13, 2026 08:30:00').getTime();
+
             const totalSpan = targetTime - startTime;
+
+            // Helper function to update text content, launch springs, and trigger cell pulses
+            function safelyUpdateMetric(elementId, value) {
+                const element = document.getElementById(elementId);
+                if (!element) return;
+
+                const stringValue = String(value).padStart(2, '0');
+                
+                // Only trigger visual effects if the structural value has changed
+                if (element.innerText !== stringValue) {
+                    element.innerText = stringValue;
+                    
+                    // 1. Text metric scale-spring trigger
+                    element.classList.remove('num-tick-active');
+                    void element.offsetWidth; // Reflow reset
+                    element.classList.add('num-tick-active');
+
+                    // 2. Cell component shockwave ring pulse trigger
+
+                    const parentBox = element.closest('.countdown-box');
+                    if (parentBox) {
+                        parentBox.classList.remove('box-pulse-active');
+                        void parentBox.offsetWidth; // Reflow reset
+                        parentBox.classList.add('box-pulse-active');
+                    }
+                }
+            }
 
             function runMetricUpdate() {
                 const now = new Date().getTime();
                 const remaining = targetTime - now;
 
                 if (remaining <= 0) {
+                    safelyUpdateMetric('weeks', 0);
+                    safelyUpdateMetric('days', 0);
+                    safelyUpdateMetric('hours', 0);
+                    safelyUpdateMetric('minutes', 0);
+                    safelyUpdateMetric('seconds', 0);
 
-                    document.getElementById('weeks').innerText = '00';
-                    document.getElementById('days').innerText = '00';
-                    document.getElementById('hours').innerText = '00';
-                    document.getElementById('minutes').innerText = '00';
-                    document.getElementById('seconds').innerText = '00';
                     document.getElementById('live-percent').innerText = '100% (Holidays!)';
                     document.getElementById('live-bar').style.width = '100%';
                     return;
@@ -679,13 +1239,13 @@
                 const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
 
-                // Target DOM Assignment with padding
-                document.getElementById('weeks').innerText = String(weeks).padStart(2, '0');
+                // Controlled DOM assignment with animation guards
+                safelyUpdateMetric('weeks', weeks);
+                safelyUpdateMetric('days', days);
+                safelyUpdateMetric('hours', hours);
+                safelyUpdateMetric('minutes', minutes);
+                safelyUpdateMetric('seconds', seconds);
 
-                document.getElementById('days').innerText = String(days).padStart(2, '0');
-                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
 
                 // Bar Percentage Computation
                 const completed = now - startTime;
@@ -701,12 +1261,12 @@
             
             // Allow close using Escape key for better UX
             document.addEventListener('keydown', function(e) {
-
                 if (e.key === 'Escape') {
                     const activePopup = document.querySelector('.fullscreen-popup.active');
                     if (activePopup) {
                         togglePopup(activePopup.id, false);
                     }
+
                 }
             });
         });
