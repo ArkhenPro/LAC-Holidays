@@ -187,7 +187,7 @@
             100% { transform: translate(-3%, -5%) scale(0.9); }
         }
 
-        /* Cool Loading Screen Overlay */
+        /* Cool Loading Screen Overlay with Dynamic Metrics */
         #loading-screen {
             position: fixed;
             top: 0;
@@ -210,14 +210,14 @@
         }
 
         .loader-spinner {
-            width: 70px;
-            height: 70px;
+            width: 80px;
+            height: 80px;
             border: 3px solid rgba(0, 242, 254, 0.03);
             border-top-color: var(--accent-glow);
             border-bottom-color: var(--accent-purple);
             border-radius: 50%;
-            animation: spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            margin-bottom: 2.5rem;
+            animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            margin-bottom: 1.5rem;
             position: relative;
         }
 
@@ -232,20 +232,36 @@
             border: 2px solid transparent;
             border-left-color: var(--accent-glow);
             border-radius: 50%;
-            animation: spin 0.5s linear infinite reverse;
+            animation: spin 0.6s linear infinite reverse;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
+        /* Centralized High-Tech Percentage Display */
+        .loader-percentage {
+
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.25rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -1px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text-main), var(--accent-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 242, 254, 0.35);
+            will-change: contents;
+        }
+
         .loader-text {
             font-family: 'Montserrat', sans-serif;
-
             font-size: 1.15rem;
             color: var(--text-main);
             letter-spacing: 4px;
             text-transform: uppercase;
+
             font-weight: 900;
             text-align: center;
             padding: 0 1.5rem;
@@ -261,13 +277,14 @@
         }
 
         .loader-subtext {
-
             font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: 0.85rem;
             letter-spacing: 1px;
+
             font-family: monospace;
             opacity: 0.8;
+            height: 18px; /* Fixed anchor bound to prevent layout jumps */
         }
 
         /* Main Widget Entry Animation */
@@ -281,10 +298,10 @@
             text-align: center;
             box-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
             margin: auto;
-
             position: relative;
             opacity: 0;
             transform: translateY(30px) scale(0.98);
+
             transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
@@ -301,10 +318,10 @@
         .college-header h1 {
             font-family: 'Montserrat', sans-serif;
             font-weight: 900;
-
             font-size: 1.65rem;
             letter-spacing: 3px;
             text-transform: uppercase;
+
             background: linear-gradient(135deg, var(--text-main) 40%, #a0aec0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -321,10 +338,10 @@
                 text-shadow: 2px -1px 0 rgba(0, 242, 254, 0.7), -2px 1px 0 rgba(79, 172, 254, 0.7);
                 transform: skewX(-2deg);
             }
-
             94.5% {
                 text-shadow: -3px 1.5px 0 rgba(0, 242, 254, 0.8), 3px -1.5px 0 rgba(255, 0, 127, 0.6);
                 transform: skewX(3deg);
+
             }
         }
 
@@ -341,10 +358,10 @@
 
         /* Animated tracking header bar line */
         .college-header p::after {
-
             content: '';
             position: absolute;
             bottom: -8px;
+
             left: 25%;
             width: 50%;
             height: 1px;
@@ -361,10 +378,10 @@
             perspective: 1200px;
         }
 
-
         @media (max-width: 680px) {
             .countdown-grid {
                 grid-template-columns: repeat(3, 1fr);
+
                 gap: 0.85rem;
             }
             .countdown-box.seconds-box, .countdown-box.minutes-box {
@@ -381,10 +398,10 @@
             opacity: 0;
             transform: scale(0.85) translateY(15px);
             transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
-
                         transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: rgba(255, 255, 255, 0.01);
             transform-style: preserve-3d;
+
             will-change: transform, box-shadow;
         }
 
@@ -401,9 +418,9 @@
             z-index: 1;
             pointer-events: none;
             opacity: 0.25;
-
             transition: opacity 0.3s ease;
         }
+
 
         .countdown-box:hover::before {
             opacity: 0.8;
@@ -421,10 +438,10 @@
             left: 1px;
             right: 1px;
             bottom: 1px;
-
             background-color: var(--inner-shield);
             border-radius: 17px;
             z-index: 2;
+
             pointer-events: none;
             transition: background-color 0.3s ease;
         }
@@ -441,10 +458,10 @@
             left: 0;
             width: 100%;
             height: 2px;
-
             background: linear-gradient(90deg, transparent, rgba(0, 242, 254, 0.3), var(--accent-glow), rgba(0, 242, 254, 0.3), transparent);
             z-index: 3;
             pointer-events: none;
+
             opacity: 0;
             animation: cardScanline 4s linear infinite;
         }
@@ -461,10 +478,10 @@
             position: relative;
             z-index: 5;
             pointer-events: none;
-
             transform: translateZ(35px);
             transition: transform 0.2s ease;
         }
+
 
         /* Sequential cascading entry delays when app initializes */
         body.loaded-active .countdown-box:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: scale(1) translateY(0); }
@@ -481,11 +498,11 @@
             display: block;
             color: var(--text-main);
             line-height: 1.1;
-
             will-change: transform, text-shadow, color;
         }
 
         /* Special neon highlights for weeks/days */
+
         .countdown-box.highlighted .countdown-num {
             color: var(--accent-glow);
             text-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
@@ -501,11 +518,11 @@
             40% {
                 transform: scale(0.93);
             }
-
             100% {
                 transform: scale(1);
             }
         }
+
 
         .num-tick-active {
             animation: numericTick 0.38s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
@@ -521,11 +538,11 @@
             border: 2px solid var(--accent-glow);
             border-radius: 50%;
             transform: translate(-50%, -50%) scale(0.1);
-
             opacity: 0;
             z-index: 4;
             pointer-events: none;
         }
+
 
         @keyframes shockwavePulse {
             0% {
@@ -541,12 +558,12 @@
                 opacity: 0;
                 filter: blur(5px);
             }
-
         }
 
         .box-pulse-active .shockwave-layer {
             animation: shockwavePulse 0.45s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
         }
+
 
         .countdown-label {
             font-size: 0.75rem;
@@ -561,13 +578,13 @@
         /* Live Tracker Progress System */
         .live-progress-container {
             margin-top: 2rem;
-
             text-align: left;
         }
 
         .progress-label-row {
             display: flex;
             justify-content: space-between;
+
             align-items: center;
             margin-bottom: 0.85rem;
         }
@@ -581,13 +598,13 @@
 
         .progress-percentage {
             color: var(--accent-glow);
-
             font-weight: 700;
             font-size: 1rem;
             text-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
         }
 
         .progress-track {
+
             background: rgba(255, 255, 255, 0.04);
             height: 14px;
             border-radius: 999px;
@@ -601,13 +618,13 @@
             background: linear-gradient(90deg, var(--accent-purple), var(--accent-glow), var(--accent-purple));
             background-size: 200% auto;
             height: 100%;
-
             width: 0%;
             border-radius: 999px;
             transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 0 15px rgba(0, 242, 254, 0.6);
             animation: shiftGlow 4s linear infinite;
             position: relative;
+
             overflow: hidden;
         }
 
@@ -621,13 +638,13 @@
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
             animation: meteorPulse 2.5s infinite linear;
-
         }
 
         @keyframes meteorPulse {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
         }
+
 
         @keyframes shiftGlow {
             0% { background-position: 0% center; }
@@ -641,7 +658,6 @@
             font-size: 0.78rem;
             color: var(--text-muted);
             opacity: 0.9;
-
         }
 
         /* Bottom Control Button Container */
@@ -649,6 +665,7 @@
             display: flex;
             gap: 1.25rem;
             justify-content: center;
+
             margin-top: 3rem;
         }
 
@@ -661,7 +678,6 @@
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
             font-size: 0.85rem;
-
             letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
@@ -669,6 +685,7 @@
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
 
         .interactive-btn::before {
             content: '';
@@ -681,7 +698,6 @@
             transition: left 0.5s ease;
         }
 
-
         .interactive-btn:hover::before {
             left: 100%;
         }
@@ -690,6 +706,7 @@
             border-color: var(--accent-glow);
             box-shadow: 0 0 25px rgba(0, 242, 254, 0.35);
             background: rgba(0, 242, 254, 0.06);
+
             transform: translateY(-3px);
         }
 
@@ -701,7 +718,6 @@
         .fullscreen-popup {
             position: fixed;
             top: 0;
-
             left: 0;
             width: 100%;
             height: 100%;
@@ -710,6 +726,7 @@
             -webkit-backdrop-filter: blur(25px);
             z-index: 1000;
             display: flex;
+
             justify-content: center;
             align-items: center;
             opacity: 0;
@@ -721,7 +738,6 @@
         .fullscreen-popup.active {
             opacity: 1;
             pointer-events: auto;
-
         }
 
         .popup-content {
@@ -730,6 +746,7 @@
             border-radius: 24px;
             padding: 3.5rem 2.5rem;
             width: 100%;
+
             max-width: 680px;
             transform: translateY(40px) scale(0.95);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -741,7 +758,6 @@
             transform: translateY(0) scale(1);
         }
 
-
         .popup-close {
             position: absolute;
             top: 1.5rem;
@@ -750,6 +766,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: var(--text-main);
             font-size: 1.35rem;
+
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -762,13 +779,13 @@
             z-index: 10;
         }
 
-
         .popup-close:hover {
             color: var(--accent-glow);
             border-color: var(--accent-glow);
             background: rgba(0, 242, 254, 0.1);
             transform: rotate(90deg) scale(1.05);
         }
+
 
         .popup-content h2 {
             font-family: 'Montserrat', sans-serif;
@@ -782,7 +799,6 @@
         }
 
         .popup-body {
-
             font-size: 1.02rem;
             line-height: 1.75;
             color: #D1D5DB;
@@ -790,6 +806,7 @@
         }
 
         .popup-body ul {
+
             list-style: none;
         }
 
@@ -802,7 +819,6 @@
             transition: transform 0.4s ease, opacity 0.4s ease;
         }
 
-
         .fullscreen-popup.active .popup-body li:nth-child(1) { transition-delay: 0.15s; transform: translateX(0); opacity: 1; }
         .fullscreen-popup.active .popup-body li:nth-child(2) { transition-delay: 0.25s; transform: translateX(0); opacity: 1; }
         .fullscreen-popup.active .popup-body li:nth-child(3) { transition-delay: 0.35s; transform: translateX(0); opacity: 1; }
@@ -810,6 +826,7 @@
         .popup-body strong {
             color: var(--text-main);
             display: block;
+
             font-size: 1.1rem;
             margin-bottom: 0.35rem;
         }
@@ -822,7 +839,6 @@
             text-align: center;
             letter-spacing: 1px;
             line-height: 1.8;
-
             z-index: 2;
         }
 
@@ -830,6 +846,7 @@
             color: var(--accent-glow);
             font-weight: 700;
             letter-spacing: 2px;
+
             text-transform: uppercase;
             font-size: 0.75rem;
             margin-top: 0.6rem;
@@ -842,7 +859,6 @@
     <!-- SVG Definitions Layer for Vector Cursor Gradients -->
     <svg style="position: absolute; width: 0; height: 0;" aria-hidden="true">
         <defs>
-
             <linearGradient id="cursor-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#00F2FE" />
                 <stop offset="100%" stop-color="#4FACFE" />
@@ -850,10 +866,10 @@
         </defs>
     </svg>
 
+
     <!-- Custom Fixed-Orientation Smooth-Edged Rounded Cursor Layers -->
     <div class="custom-cursor-pointer" id="cursor-core">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-            <!-- Hyper-smooth cursor silhouette plotted with curved bezier nodes and generous rounded tracking joints -->
             <path d="M 5,3 
                      C 5,3 25.5,13.2 26,13.5 
                      C 26.5,13.8 26.2,14.6 25.5,14.8
@@ -862,7 +878,6 @@
                      C 14.3,26.2 13.5,26.5 13.2,26
                      C 12.9,25.5 5,3 5,3 Z" />
         </svg>
-
     </div>
     <div class="custom-cursor-trail" id="cursor-shadow">
         <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
@@ -871,17 +886,18 @@
     </div>
 
     <!-- Ambient Plasma Floating Layers -->
+
     <div class="ambient-orb orb-1"></div>
     <div class="ambient-orb orb-2"></div>
     <div class="ambient-orb orb-3"></div>
 
-    <!-- Cool Loading Screen Overlay -->
+    <!-- Cool Loading Screen Overlay with dynamic centralized percentage tracking -->
     <div id="loading-screen">
         <div class="loader-spinner"></div>
+        <div class="loader-percentage" id="loader-percentage">0%</div>
         <div class="loader-text">Connecting to LAC Holiday Countdown Servers</div>
         <div class="loader-subtext" id="loader-status">Initializing connection protocol...</div>
     </div>
-
 
     <!-- Main Dynamic Center Interface Widget -->
     <div class="main-widget">
@@ -890,6 +906,7 @@
         <div class="college-header">
             <h1>Leppington Anglican College</h1>
             <p>Holiday Countdown</p>
+
         </div>
 
         <!-- The Countdown Matrix including Weeks and Internalized Scan Layers -->
@@ -902,7 +919,6 @@
                     <span class="countdown-num" id="weeks">00</span>
                     <span class="countdown-label">Weeks</span>
                 </div>
-
             </div>
 
             <div class="countdown-box highlighted">
@@ -910,6 +926,7 @@
                 <div class="shockwave-layer"></div>
                 <div class="countdown-box-content">
                     <span class="countdown-num" id="days">00</span>
+
                     <span class="countdown-label">Days</span>
                 </div>
             </div>
@@ -923,13 +940,13 @@
                 </div>
             </div>
 
-
             <div class="countdown-box minutes-box">
                 <div class="countdown-box-inner"></div>
                 <div class="shockwave-layer"></div>
                 <div class="countdown-box-content">
                     <span class="countdown-num" id="minutes">00</span>
                     <span class="countdown-label">Mins</span>
+
                 </div>
             </div>
 
@@ -944,12 +961,12 @@
 
         </div>
 
-
         <!-- Live Interactive Progress Component -->
         <div class="live-progress-container">
             <div class="progress-label-row">
                 <span class="progress-title">Term 4 Completion Tracker</span>
                 <span class="progress-percentage" id="live-percent">0%</span>
+
             </div>
             <div class="progress-track">
                 <div class="progress-bar" id="live-bar"></div>
@@ -964,12 +981,12 @@
         <div class="button-container">
             <button class="interactive-btn" onclick="togglePopup('tips-popup', true)">Tips for the holiday</button>
             <button class="interactive-btn" onclick="togglePopup('more-popup', true)">More Info</button>
-
         </div>
 
     </div>
 
     <!-- Full Screen Popup: Holiday Tips -->
+
     <div id="tips-popup" class="fullscreen-popup" onclick="handleOverlayClick(event, 'tips-popup')">
         <div class="popup-content">
             <button class="popup-close" onclick="togglePopup('tips-popup', false)" aria-label="Close popup">&times;</button>
@@ -984,12 +1001,12 @@
                         <strong>Creative Pursuits & Reading</strong>
                         Ditch the academic course materials and pick up independent creative projects. It's the perfect time to explore fiction novels, write scripts, or build personal software tools.
                     </li>
-
                     <li>
                         <strong>Reconnect with Friends & Family</strong>
                         Plan down-time balances. Use the festive season to set up summer barbecues, group sports sessions, or custom travel excursions with close family members and peers.
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>
@@ -1004,12 +1021,12 @@
                     <li>
                         <strong>Official Term 4 Boundaries</strong>
                         Term 4 commenced on Tuesday, 13 October 2026 and concludes for students on Wednesday, 9 December 2026.
-
                     </li>
                     <li>
                         <strong>Summer break distribution</strong>
                         The vacation span transitions from Thursday, 10 December 2026 through until the designated start metrics of the 2027 calendar layout.
                     </li>
+
                     <li>
                         <strong>2027 Term 1 Rollout</strong>
                         Staff allocations activate on Monday, 1 February 2027. Selected early learning and secondary cohorts start classes on Tuesday, 2 February 2027, with regular comprehensive attendance resuming on Wednesday, 3 February 2027.
@@ -1025,11 +1042,11 @@
         <div class="credit-text">Made by Arkhen</div>
     </footer>
 
-
     <!-- System Logic Setup -->
     <script>
         // Modal management engine
         function togglePopup(popupId, show) {
+
             const popupElement = document.getElementById(popupId);
             if (!popupElement) return;
             
@@ -1045,10 +1062,10 @@
         // Fallback: Close popup when clicking the outside darkened background overlay area
         function handleOverlayClick(event, popupId) {
             if (event.target.classList.contains('fullscreen-popup')) {
-
                 togglePopup(popupId, false);
             }
         }
+
 
         document.addEventListener('DOMContentLoaded', function() {
             // --- Custom Smooth-Edged Fixed-Orientation Cursor Engine ---
@@ -1065,11 +1082,11 @@
                     mouseY = e.clientY;
                 });
 
-
                 // Smooth Physics Positional Animation Loop (No Directional Distortions, No Particle Emitters)
                 function animateCursorDynamics() {
                     // Snappy core positional tracking alignment
                     let dCoreX = mouseX - coreX;
+
                     let dCoreY = mouseY - coreY;
                     coreX += dCoreX * 0.45;
                     coreY += dCoreY * 0.45;
@@ -1085,11 +1102,11 @@
                     shadowEl.style.transform = `translate3d(${shadowX}px, ${shadowY}px, 0) scale(1)`;
 
                     requestAnimationFrame(animateCursorDynamics);
-
                 }
                 requestAnimationFrame(animateCursorDynamics);
 
                 // Fine Concentric Neon Ring expansion feedback on mouse click strikes
+
                 document.addEventListener('mousedown', (e) => {
                     document.body.classList.add('cursor-clicking');
                     
@@ -1106,10 +1123,10 @@
                     document.body.classList.remove('cursor-clicking');
                 });
 
-
                 // Standard component interaction hover state triggers
                 function bindCursorEffects() {
                     const targets = document.querySelectorAll('button, .countdown-box, a, .popup-close, .interactive-btn');
+
                     targets.forEach(element => {
                         element.addEventListener('mouseenter', () => document.body.classList.add('cursor-hovering'));
                         element.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hovering'));
@@ -1124,36 +1141,58 @@
                 });
             }
 
-            // --- Loading Screen Simulation Logic ---
+            // --- Fine-Tuned Loading Screen Counter Engine ---
             const statusLines = [
-
                 "Initializing connection protocol...",
                 "Checking NSW School Holidays...",
                 "Pinging LAC countdown database...",
+
                 "Fetching regional academic calendar parameters...",
                 "Synchronizing localized metric clock arrays...",
                 "Handshake confirmed. Rendering countdown interface..."
             ];
-            let lineIndex = 0;
-            const statusElement = document.getElementById('loader-status');
             
-            const statusInterval = setInterval(() => {
-                lineIndex++;
-                if (lineIndex < statusLines.length && statusElement) {
-                    statusElement.innerText = statusLines[lineIndex];
-                }
-            }, 500);
+            let currentPercentage = 0;
+            const percentageDisplay = document.getElementById('loader-percentage');
+            const statusDisplay = document.getElementById('loader-status');
+            
+            const totalLoadTime = 3400; // Complete animation window (ms)
+            const cycleInterval = 25;   // Tick refresh resolution (ms)
+            const tickSteps = totalLoadTime / cycleInterval;
+            const incrementRatio = 100 / tickSteps;
+            
+            const incrementalCounter = setInterval(() => {
+                currentPercentage += incrementRatio;
+                
+                // Guard constraint capping once metric hits ceiling limit
+                if (currentPercentage >= 100) {
 
-            // Transition out the loading layer once simulated synchronization concludes
-            setTimeout(() => {
-
-                clearInterval(statusInterval);
-                const loader = document.getElementById('loading-screen');
-                if (loader) {
-                    loader.classList.add('fade-out');
-                    document.body.classList.add('loaded-active');
+                    currentPercentage = 100;
+                    clearInterval(incrementalCounter);
+                    
+                    // Fire graceful dismissal animation sequences
+                    const loadingScreenOverlay = document.getElementById('loading-screen');
+                    if (loadingScreenOverlay) {
+                        loadingScreenOverlay.classList.add('fade-out');
+                        document.body.classList.add('loaded-active');
+                    }
                 }
-            }, 3200);
+                
+                // Direct high-performance DOM text string replacement
+                if (percentageDisplay) {
+                    percentageDisplay.innerText = Math.floor(currentPercentage) + '%';
+                }
+                
+                // Map text logs smoothly across corresponding numerical bounds
+                if (statusDisplay) {
+                    const mappedIndex = Math.min(
+
+                        Math.floor((currentPercentage / 100) * statusLines.length),
+                        statusLines.length - 1
+                    );
+                    statusDisplay.innerText = statusLines[mappedIndex];
+                }
+            }, cycleInterval);
 
 
             // --- Interactive Mouse-Tracking 3D Perspective Tilt Parallax ---
@@ -1166,8 +1205,8 @@
                     const y = e.clientY - rect.top;
                     
                     const centerX = rect.width / 2;
-
                     const centerY = rect.height / 2;
+
                     
                     const rotateX = ((centerY - y) / centerY) * 12;
                     const rotateY = ((x - centerX) / centerX) * 12;
@@ -1186,8 +1225,8 @@
             const targetTime = new Date('December 9, 2026 15:00:00').getTime();
             // Start Bound: Tuesday, October 13, 2026, at 8:30 AM
             const startTime = new Date('October 13, 2026 08:30:00').getTime();
-
             const totalSpan = targetTime - startTime;
+
 
             // Helper function to update text content, launch springs, and trigger cell pulses
             function safelyUpdateMetric(elementId, value) {
@@ -1206,9 +1245,9 @@
                     element.classList.add('num-tick-active');
 
                     // 2. Cell component shockwave ring pulse trigger
-
                     const parentBox = element.closest('.countdown-box');
                     if (parentBox) {
+
                         parentBox.classList.remove('box-pulse-active');
                         void parentBox.offsetWidth; // Reflow reset
                         parentBox.classList.add('box-pulse-active');
@@ -1226,9 +1265,9 @@
                     safelyUpdateMetric('hours', 0);
                     safelyUpdateMetric('minutes', 0);
                     safelyUpdateMetric('seconds', 0);
-
                     document.getElementById('live-percent').innerText = '100% (Holidays!)';
                     document.getElementById('live-bar').style.width = '100%';
+
                     return;
                 }
 
@@ -1246,9 +1285,9 @@
                 safelyUpdateMetric('minutes', minutes);
                 safelyUpdateMetric('seconds', seconds);
 
-
                 // Bar Percentage Computation
                 const completed = now - startTime;
+
                 let ratio = (completed / totalSpan) * 100;
                 ratio = Math.max(0, Math.min(ratio, 100)); // Guard constraints
 
@@ -1266,9 +1305,9 @@
                     if (activePopup) {
                         togglePopup(activePopup.id, false);
                     }
-
                 }
             });
+
         });
     </script>
 </body>
