@@ -1,0 +1,717 @@
+# Leppington Anglican College - Custom Holiday Countdown
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAC Holiday Countdown</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0B0F19;
+            --card-bg: #161B26;
+            --accent-glow: #00F2FE;
+            --accent-purple: #4FACFE;
+            --text-main: #FFFFFF;
+            --text-muted: #8F9CAE;
+
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            overflow-x: hidden;
+            padding: 2rem 1rem;
+
+        }
+
+        /* Ambient background glows */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+
+            width: 50%;
+            height: 50%;
+            background: radial-gradient(circle, rgba(79, 172, 254, 0.15) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* Cool Loading Screen Overlay */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), pointer-events 0.6s ease;
+        }
+
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid rgba(0, 242, 254, 0.05);
+            border-top-color: var(--accent-glow);
+            border-bottom-color: var(--accent-purple);
+            border-radius: 50%;
+            animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+
+        .loader-spinner::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid transparent;
+            border-left-color: var(--accent-glow);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite reverse;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            font-family: 'Montserrat', sans-serif;
+
+            font-size: 1.1rem;
+            color: var(--text-main);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 900;
+            text-align: center;
+            padding: 0 1.5rem;
+            background: linear-gradient(90deg, var(--text-main), var(--accent-glow), var(--text-main));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .loader-subtext {
+
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            letter-spacing: 1px;
+            font-family: monospace;
+        }
+
+        /* Centered Main Widget Container */
+        .main-widget {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            margin: auto;
+            position: relative;
+
+        }
+
+        /* College Header */
+        .college-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .college-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--text-main) 30%, var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .college-header p {
+
+            color: var(--accent-glow);
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 0.25rem;
+            font-weight: 700;
+        }
+
+        /* Center Grid Layout for Countdown */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 640px) {
+            .countdown-grid {
+                grid-template-columns: repeat(3, 1fr);
+
+                gap: 0.75rem;
+            }
+            .countdown-box.seconds-box, .countdown-box.minutes-box {
+                grid-column: span 1;
+            }
+        }
+
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            padding: 1.25rem 0.5rem;
+            border-radius: 16px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .countdown-box:hover {
+            border-color: rgba(0, 242, 254, 0.3);
+            background: rgba(255, 255, 255, 0.04);
+
+            transform: translateY(-2px);
+        }
+
+        .countdown-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            color: var(--text-main);
+            line-height: 1.1;
+        }
+
+        /* Highlight the weeks and days specifically */
+        .countdown-box.highlighted .countdown-num {
+            color: var(--accent-glow);
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
+        }
+
+        .countdown-label {
+
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            display: block;
+            font-weight: 700;
+        }
+
+        /* Live Progress Slider */
+        .live-progress-container {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .progress-label-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 0.75rem;
+        }
+
+        .progress-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .progress-percentage {
+            color: var(--accent-glow);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .progress-track {
+            background: rgba(255, 255, 255, 0.05);
+            height: 12px;
+
+            border-radius: 999px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-glow));
+            height: 100%;
+            width: 0%;
+            border-radius: 999px;
+            transition: width 0.5s ease-out;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        .date-footer-row {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Interactive Buttons Style */
+        .button-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+        }
+
+        .interactive-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            padding: 0.8rem 1.8rem;
+            border-radius: 12px;
+
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-btn:hover {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.3);
+            background: rgba(0, 242, 254, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Full Screen Popup Modals */
+        .fullscreen-popup {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(11, 15, 25, 0.96);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+        }
+
+        .fullscreen-popup.active {
+            opacity: 1;
+            pointer-events: auto;
+
+        }
+
+        .popup-content {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            width: 100%;
+            max-width: 650px;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+        }
+
+        .fullscreen-popup.active .popup-content {
+            transform: translateY(0);
+        }
+
+
+        /* Secure, Clickable Close Button Design placed inside the card frame */
+        .popup-close {
+            position: absolute;
+            top: 1.25rem;
+            right: 1.25rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            font-size: 1.25rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1;
+            z-index: 10;
+
+        }
+
+        .popup-close:hover {
+            color: var(--accent-glow);
+            border-color: var(--accent-glow);
+            background: rgba(0, 242, 254, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .popup-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--accent-glow);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-right: 2rem;
+        }
+
+
+        .popup-body {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #CBD5E0;
+            text-align: left;
+        }
+
+        .popup-body ul {
+            list-style: none;
+        }
+
+        .popup-body li {
+            margin-bottom: 1.25rem;
+            border-left: 3px solid var(--accent-purple);
+            padding-left: 1rem;
+        }
+
+        .popup-body strong {
+            color: var(--text-main);
+
+            display: block;
+            font-size: 1.05rem;
+            margin-bottom: 0.25rem;
+        }
+
+        /* Subtle Simple Footer */
+        footer {
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+            letter-spacing: 1px;
+            line-height: 1.8;
+        }
+
+        .credit-text {
+            color: var(--accent-glow);
+            font-weight: 700;
+            letter-spacing: 2px;
+
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cool Loading Screen Overlay -->
+    <div id="loading-screen">
+        <div class="loader-spinner"></div>
+        <div class="loader-text">Connecting to LAC Holiday Countdown Servers</div>
+        <div class="loader-subtext" id="loader-status">Initializing connection protocol...</div>
+    </div>
+
+    <!-- Main Dynamic Center Interface Widget -->
+    <div class="main-widget">
+        
+        <!-- College Identification Info -->
+
+        <div class="college-header">
+            <h1>Leppington Anglican College</h1>
+            <p>Holiday Countdown</p>
+        </div>
+
+        <!-- The Countdown Matrix including Weeks -->
+        <div class="countdown-grid">
+            <div class="countdown-box highlighted">
+                <span class="countdown-num" id="weeks">00</span>
+                <span class="countdown-label">Weeks</span>
+            </div>
+            <div class="countdown-box highlighted">
+                <span class="countdown-num" id="days">00</span>
+                <span class="countdown-label">Days</span>
+            </div>
+            <div class="countdown-box">
+                <span class="countdown-num" id="hours">00</span>
+                <span class="countdown-label">Hours</span>
+            </div>
+
+            <div class="countdown-box minutes-box">
+                <span class="countdown-num" id="minutes">00</span>
+                <span class="countdown-label">Mins</span>
+            </div>
+            <div class="countdown-box seconds-box">
+                <span class="countdown-num" id="seconds">00</span>
+                <span class="countdown-label">Secs</span>
+            </div>
+        </div>
+
+        <!-- Live Interactive Progress Component -->
+        <div class="live-progress-container">
+            <div class="progress-label-row">
+                <span class="progress-title">Term 4 Completion Tracker</span>
+                <span class="progress-percentage" id="live-percent">0%</span>
+            </div>
+            <div class="progress-track">
+                <div class="progress-bar" id="live-bar"></div>
+            </div>
+
+            <div class="date-footer-row">
+                <span>Start: Oct 13, 2026</span>
+                <span>End: Dec 9, 2026</span>
+            </div>
+        </div>
+
+        <!-- Dynamic Popup Action Buttons -->
+        <div class="button-container">
+            <button class="interactive-btn" onclick="togglePopup('tips-popup', true)">Tips for the holiday</button>
+            <button class="interactive-btn" onclick="togglePopup('more-popup', true)">More Info</button>
+        </div>
+
+    </div>
+
+    <!-- Full Screen Popup: Holiday Tips -->
+    <div id="tips-popup" class="fullscreen-popup" onclick="handleOverlayClick(event, 'tips-popup')">
+        <div class="popup-content">
+            <button class="popup-close" onclick="togglePopup('tips-popup', false)" aria-label="Close popup">&times;</button>
+            <h2>Holiday Tips & Ideas</h2>
+
+            <div class="popup-body">
+                <ul>
+                    <li>
+                        <strong>Outdoor Summer Adventures</strong>
+                        Outdoor activities are an excellent way to unwind. Consider scheduling visits to regional community beaches, standard public parks, or coastal tracks to make the most of the Australian summer.
+                    </li>
+                    <li>
+                        <strong>Creative Pursuits & Reading</strong>
+                        Ditch the academic course materials and pick up independent creative projects. It's the perfect time to explore fiction novels, write scripts, or build personal software tools.
+                    </li>
+                    <li>
+                        <strong>Reconnect with Friends & Family</strong>
+                        Plan down-time balances. Use the festive season to set up summer barbecues, group sports sessions, or custom travel excursions with close family members and peers.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Full Screen Popup: More Info -->
+    <div id="more-popup" class="fullscreen-popup" onclick="handleOverlayClick(event, 'more-popup')">
+        <div class="popup-content">
+            <button class="popup-close" onclick="togglePopup('more-popup', false)" aria-label="Close popup">&times;</button>
+            <h2>Academic Schedule Details</h2>
+            <div class="popup-body">
+                <ul>
+                    <li>
+                        <strong>Official Term 4 Boundaries</strong>
+                        Term 4 commenced on Tuesday, 13 October 2026 and concludes for students on Wednesday, 9 December 2026.
+                    </li>
+                    <li>
+                        <strong>Summer break distribution</strong>
+                        The vacation span transitions from Thursday, 10 December 2026 through until the designated start metrics of the 2027 calendar layout.
+                    </li>
+                    <li>
+                        <strong>2027 Term 1 Rollout</strong>
+                        Staff allocations activate on Monday, 1 February 2027. Selected early learning and secondary cohorts start classes on Tuesday, 2 February 2027, with regular comprehensive attendance resuming on Wednesday, 3 February 2027.
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimal System Footer with requested credit -->
+    <footer>
+        <div>Live Academic Metric Core Engine &bull; Term 4</div>
+        <div class="credit-text">Made by Arkhen</div>
+    </footer>
+
+    <!-- System Logic Setup -->
+    <script>
+        // Modal management engine
+        function togglePopup(popupId, show) {
+            const popupElement = document.getElementById(popupId);
+            if (!popupElement) return;
+            
+            if (show) {
+
+                popupElement.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Lock background scroll
+            } else {
+                popupElement.classList.remove('active');
+                document.body.style.overflow = ''; // Restore background scroll
+            }
+        }
+
+        // Fallback: Close popup when clicking the outside darkened background overlay area
+        function handleOverlayClick(event, popupId) {
+            if (event.target.classList.contains('fullscreen-popup')) {
+                togglePopup(popupId, false);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Loading Screen Simulation Logic ---
+            const statusLines = [
+                "Initializing connection protocol...",
+
+                "Checking NSW School Holidays...",
+                "Pinging LAC countdown database...",
+                "Fetching regional academic calendar parameters...",
+                "Synchronizing localized metric clock arrays...",
+                "Handshake confirmed. Rendering countdown interface..."
+            ];
+            let lineIndex = 0;
+            const statusElement = document.getElementById('loader-status');
+            
+            const statusInterval = setInterval(() => {
+                lineIndex++;
+                if (lineIndex < statusLines.length && statusElement) {
+                    statusElement.innerText = statusLines[lineIndex];
+                }
+            }, 500);
+
+            // Transition out the loading layer once simulated synchronization concludes
+            setTimeout(() => {
+                clearInterval(statusInterval);
+
+                const loader = document.getElementById('loading-screen');
+                if (loader) {
+                    loader.classList.add('fade-out');
+                }
+            }, 3200);
+
+
+            // --- Core Countdown Clock Engine ---
+            // Target End: Wednesday, December 9, 2026, at 3:00 PM
+            const targetTime = new Date('December 9, 2026 15:00:00').getTime();
+            // Start Bound: Tuesday, October 13, 2026, at 8:30 AM
+            const startTime = new Date('October 13, 2026 08:30:00').getTime();
+            const totalSpan = targetTime - startTime;
+
+            function runMetricUpdate() {
+                const now = new Date().getTime();
+                const remaining = targetTime - now;
+
+                if (remaining <= 0) {
+
+                    document.getElementById('weeks').innerText = '00';
+                    document.getElementById('days').innerText = '00';
+                    document.getElementById('hours').innerText = '00';
+                    document.getElementById('minutes').innerText = '00';
+                    document.getElementById('seconds').innerText = '00';
+                    document.getElementById('live-percent').innerText = '100% (Holidays!)';
+                    document.getElementById('live-bar').style.width = '100%';
+                    return;
+                }
+
+                // Math Segmentations (Including Weeks Breakdown)
+                const weeks = Math.floor(remaining / (1000 * 60 * 60 * 24 * 7));
+                const days = Math.floor((remaining % (1000 * 60 * 60 * 24 * 7)) / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+                // Target DOM Assignment with padding
+                document.getElementById('weeks').innerText = String(weeks).padStart(2, '0');
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+
+                // Bar Percentage Computation
+                const completed = now - startTime;
+                let ratio = (completed / totalSpan) * 100;
+                ratio = Math.max(0, Math.min(ratio, 100)); // Guard constraints
+
+                document.getElementById('live-bar').style.width = ratio.toFixed(4) + '%';
+                document.getElementById('live-percent').innerText = ratio.toFixed(1) + '%';
+            }
+
+            runMetricUpdate();
+            setInterval(runMetricUpdate, 1000);
+            
+            // Allow close using Escape key for better UX
+            document.addEventListener('keydown', function(e) {
+
+                if (e.key === 'Escape') {
+                    const activePopup = document.querySelector('.fullscreen-popup.active');
+                    if (activePopup) {
+                        togglePopup(activePopup.id, false);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
